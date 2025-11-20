@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n = nums.size();
+        int minJump = INT_MAX;
+        vector<int> paths(n,INT_MAX);
+        paths[n-1] = 0;
+        for(int i=n-2;i>=0;i--){
+            int jumps = nums[i];
+            int mini = INT_MAX;
+            for(int j=1;j<=jumps;j++){
+                if(i+j<n)
+                    mini = min(mini,paths[i+j]);
+            } 
+            if(mini!=INT_MAX)
+                paths[i] = mini+1;
+        }
+        return paths[0];
+    }
+};
